@@ -1,0 +1,91 @@
+{
+  "v": "4.0",
+  "workspace": {
+    "environments": [
+      {
+        "name": "python_gae",
+        "machineConfigs": [
+          {
+            "limits": {
+              "ram": 1000
+            },
+            "name": "ws-machine",
+            "type": "docker",
+            "source": {
+              "location": "http://beta.codenvy.com/api/recipe/recipe243ounwwcfqgbzvs/script",
+              "type": "dockerfile"
+            },
+            "dev": true,
+            "servers": [],
+            "envVariables": {},
+            "links": []
+          }
+        ]
+      }
+    ],
+    "defaultEnv": "python_gae",
+    "projects": [
+      {
+        "links": [],
+        "name": "web-python-gae-simple",
+        "attributes": {
+          "vcs.provider.name": [
+            "git"
+          ],
+          "git.current.branch.name": [
+            "master"
+          ],
+          "contribute_to_branch": [
+            "master"
+          ],
+          "git.repository.remotes": [
+            "https://github.com/che-samples/web-python-gae-simple.git"
+          ]
+        },
+        "type": "blank",
+        "source": {
+          "location": "https://github.com/che-samples/web-python-gae-simple.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/web-python-gae-simple",
+        "problems": [],
+        "mixins": [
+          "pullrequest",
+          "git"
+        ]
+      }
+    ],
+    "name": "python_gae",
+    "commands": [
+      {
+        "commandLine": "cd ${GAE} && ./dev_appserver.py 2>&1  --skip_sdk_update_check true --host=0.0.0.0 --admin_host=0.0.0.0 ${current.project.path}",
+        "name": "run",
+        "attributes": {
+          "previewUrl": "http://${server.port.8080}"
+        },
+        "type": "custom"
+      }
+    ],
+    "links": []
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "name": "run"
+          },
+          "id": "runCommand"
+        },
+        {
+          "properties": {
+            "file": "/web-python-gae-simple/app.yaml"
+          },
+          "id": "openFile"
+        }
+      ]
+    }
+  },
+  "name": "Python-GAE"
+}
