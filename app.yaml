@@ -1,4 +1,4 @@
-application: your-app-id
+application: protersville-vfd
 version: 1
 runtime: python27
 api_version: 1
@@ -13,7 +13,7 @@ handlers:
   static_dir: bootstrap
 
 - url: /.*
-  script: guestbook.application
+  script: lords.application
 
 libraries:
 - name: webapp2
