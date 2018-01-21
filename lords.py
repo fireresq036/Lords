@@ -51,6 +51,12 @@ class LordsCombat(webapp2.RequestHandler):
             self.response.out.write(template.render())
 
 
+class AngularTest(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('lords_angular.html')
+        self.response.out.write(template.render())
+
+
 class MainPage(webapp2.RequestHandler):
     def get(self):
         if users.get_current_user():
@@ -68,4 +74,5 @@ application = webapp2.WSGIApplication(
     [
         ('/', MainPage),
         ('/lords_combat', LordsCombat),
+        ('/lords_angular', AngularTest),
     ], debug=True)

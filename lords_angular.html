@@ -1,9 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-</head>
-<body>
+  <head>
+    <title>Angular JS test page</title>
+  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+  </script>
+  <body>
+    <div ng-app="LordsCombat"  ng-controller="combatCtrl">
+        {a firstName + " " + lastName a}
+    </div>
+  </body>
+  <script>
+    var app = angular.module("LordsCombat", []);
 
-</body>
+    app.controller("combatCtrl", function($scope) {
+      $scope.firstName = "John";
+      $scope.lastName = "Doe";}
+    );
+    app.config(function($interpolateProvider) {
+      $interpolateProvider.startSymbol('{a').endSymbol('a}');
+    })
+  </script>
 </html>
