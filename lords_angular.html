@@ -7,16 +7,20 @@
   </script>
   <body>
     <div ng-app="LordsCombat"  ng-controller="combatCtrl">
-        {a firstName + " " + lastName a}
+      <p>Level1</p>
+      <br/>
+      infentry: <input type="text" ng-model="level1.inf">
+      <br/>
+      <p> {a level1.inf a} </p>
     </div>
   </body>
   <script>
     var app = angular.module("LordsCombat", []);
 
     app.controller("combatCtrl", function($scope) {
-      $scope.firstName = "John";
-      $scope.lastName = "Doe";}
-    );
+      $scope.level1.inf = 0;
+      $scope.level1.arch = 0;
+    });
     app.config(function($interpolateProvider) {
       $interpolateProvider.startSymbol('{a').endSymbol('a}');
     })

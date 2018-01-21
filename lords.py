@@ -1,5 +1,6 @@
 import collections
 import jinja2
+import json
 import logging
 import os
 import webapp2
@@ -40,6 +41,28 @@ def process_input(request):
     logging.info(input[1])
 
 
+def init_data():
+    # process the input
+    inputs = {}
+    inputs["level1"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
+    inputs["level2"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
+    inputs["level3"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
+    inputs["level4"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
+    logging.info(inputs)
+    return inputs
+
+
+def troops_as_json(troops):
+    return json.dumps(troops)
+
+
+class TroopData(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('troop_data.html')
+        self.response.out.write(
+            template.render(troopdata=troops_as_json(init_data())))
+
+
 class LordsCombat(webapp2.RequestHandler):
     def get(self):
         if self.request.get('initial', True):
@@ -75,4 +98,5 @@ application = webapp2.WSGIApplication(
         ('/', MainPage),
         ('/lords_combat', LordsCombat),
         ('/lords_angular', AngularTest),
+        ('/troop_data', TroopData)
     ], debug=True)
