@@ -1,3 +1,4 @@
+import collections
 import jinja2
 import logging
 import os
@@ -9,6 +10,7 @@ from google.appengine.api import users
 # same entity group. Queries across the single entity group will be consistent.
 # However, the write rate should be limited to ~1/second.
 
+Troops = collections.namedtuple('Troops', 'inf, arch calv siege')
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -18,16 +20,23 @@ jinja_environment = jinja2.Environment(
 
 def process_input(request):
     # process the input
-    input = {}
-    input[1] = []
-    input[2] = []
-    input[3] = []
-    input[4] = []
-
-    input[1].append(request.get('inf1', 0))
-    input[1].append(request.get('arch1', 0))
-    input[1].append(request.get('cav1', 0))
-    input[1].append(request.get('seige1', 0))
+    inputs = collections.defaultdict(Troops)
+    inputs[1].inf = request.get('inf1', 0)
+    inputs[1].arch = request.get('arch1', 0)
+    inputs[1].cav = request.get('cav1', 0)
+    inputs[1].seige = request.get('seige1', 0)
+    inputs[2].inf = request.get('inf2', 0)
+    inputs[2].arch = request.get('arch2', 0)
+    inputs[2].cav = request.get('cav2', 0)
+    inputs[2].seige = request.get('seige2', 0)
+    inputs[3].inf = request.get('inf3', 0)
+    inputs[3].arch = request.get('arch3', 0)
+    inputs[3].cav = request.get('cav3', 0)
+    inputs[3].seige = request.get('seige3', 0)
+    inputs[4].inf = request.get('inf4', 0)
+    inputs[4].arch = request.get('arch4', 0)
+    inputs[4].cav = request.get('cav4', 0)
+    inputs[4].seige = request.get('seige4', 0)
     logging.info(input[1])
 
 
