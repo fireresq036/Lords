@@ -44,16 +44,23 @@ def process_input(request):
 def init_data():
     # process the input
     inputs = {}
-    inputs["level1"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
+    inputs["level1"] = {"inf": {"name": "Grunt", "count": 0},
+                        "arch": {"name": "Archer", "count": 0},
+                        "cav": {"name": "Cataphract", "count": 0},
+                        "seige": {"name": "Ballista", "count": 0}}
     inputs["level2"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
     inputs["level3"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
     inputs["level4"] = {"inf": 0, "arch": 0, "cav": 0, "seige": 0}
-    logging.info(inputs)
     return inputs
 
 
 def troops_as_json(troops):
-    return json.dumps(troops)
+    out = ["{\"troops\":"]
+    out.append(json.dumps(troops))
+    out.append("}")
+    result = "".join(out)
+    logging.info(result)
+    return result
 
 
 class TroopData(webapp2.RequestHandler):

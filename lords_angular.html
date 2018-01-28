@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+  </script>
   <head>
     <title>Angular JS test page</title>
   </head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
-  </script>
   <body>
-    <div ng-app="LordsCombat"  ng-controller="combatCtrl">
+    <div ng-app="LordsCombat"  ng-controller="CompatInit">
+      <div></div>
       <p>Level1</p>
       <br/>
-      infentry: <input type="text" ng-model="level1.inf">
+      {a troops.level1.inf.name a}: 
+        <input ng-model="troops.level1.inf.count" type="number" min="0">
+      {a troops.level1.arch.name a}: 
+        <input ng-model="troops.level1.arch.count" type="number" min="0">
       <br/>
-      <p> {a level1.inf a} </p>
+      <p>Level 2</p>
+      {a troops.level2.inf.name a}: 
+        <input ng-model="troops.level2.inf.count" type="number" min="0">
+      {a troops.level2.arch.name a}: 
+        <input ng-model="troops.level2.arch.count" type="number" min="0">
+      <p> Troops: |{a troops a}| </p>
     </div>
   </body>
   <script>
     var app = angular.module("LordsCombat", []);
-
-    app.controller("combatCtrl", function($scope) {
-      $scope.level1.inf = 0;
-      $scope.level1.arch = 0;
-    });
     app.config(function($interpolateProvider) {
       $interpolateProvider.startSymbol('{a').endSymbol('a}');
-    })
+    });
+    app.controller('CompatInit', function($scope) {
+        $scope.troops = 
+        {"level1": 
+            {"inf": {"count": 0, "name": "Grunt"},
+             "seige": {"count": 0, "name": "Ballista"}, 
+             "arch": {"count": 0, "name": "Archer"}, 
+             "cav": {"count": 0, "name": "Cataphract"}
+            },
+        "level2": 
+            {"inf": {"count": 0, "name": "Gladiator"},
+             "seige": {"count": 0, "name": "Catapult"}, 
+             "arch": {"count": 0, "name": "Sharp Shootyer"}, 
+             "cav": {"count": 0, "name": "Reptilan Raider"}
+            },
+         "level3": 
+            {"inf": {"count": 0, "name": "Royal Guard"},
+             "seige": {"count": 0, "name": "Fire Trebuchet"}, 
+             "arch": {"count": 0, "name": "Stealth Sniper"}, 
+             "cav": {"count": 0, "name": "Royal Cavalry"}
+            },
+         "level4": 
+            {"inf": {"count": 0, "name": "Heroic Fighter"},
+             "seige": {"count": 0, "name": "Destroyer"}, 
+             "arch": {"count": 0, "name": "Heroic Cannoner"}, 
+             "cav": {"count": 0, "name": "Anchent Drake Rider"}
+            }
+        }});
   </script>
 </html>
