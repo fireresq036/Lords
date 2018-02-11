@@ -7,20 +7,70 @@
   </head>
   <body>
     <div ng-app="LordsCombat"  ng-controller="CompatInit">
-      <div></div>
-      <p>Level1</p>
-      <br/>
-      {a troops.level1.inf.name a}: 
-        <input ng-model="troops.level1.inf.count" type="number" min="0">
-      {a troops.level1.arch.name a}: 
-        <input ng-model="troops.level1.arch.count" type="number" min="0">
-      <br/>
-      <p>Level 2</p>
-      {a troops.level2.inf.name a}: 
-        <input ng-model="troops.level2.inf.count" type="number" min="0">
-      {a troops.level2.arch.name a}: 
-        <input ng-model="troops.level2.arch.count" type="number" min="0">
-      <p> Troops: |{a troops a}| </p>
+      <div style="width:100%">
+          <div style="width:30%;float:left;">
+            <p>Level 1</p>
+            {a troops.level1.inf.name a}: 
+              <input ng-model="troops.level1.inf.count" type="number" min="0">
+            <br/>
+            {a troops.level1.arch.name a}: 
+              <input ng-model="troops.level1.arch.count" type="number" min="0">
+                        <br/>
+            {a troops.level1.cav.name a}: 
+              <input ng-model="troops.level1.cav.count" type="number" min="0">
+            <br/>
+            {a troops.level1.seige.name a}: 
+              <input ng-model="troops.level1.seige.count" type="number" min="0">
+          </div>
+          <div style="width:30%;clear: left;">
+            <p>Level 2</p>
+            {a troops.level2.inf.name a}: 
+              <input ng-model="troops.level2.inf.count" type="number" min="0">
+            <br/>
+            {a troops.level2.arch.name a}: 
+              <input ng-model="troops.level2.arch.count" type="number" min="0">
+            <br/>
+            {a troops.level2.cav.name a}: 
+              <input ng-model="troops.level2.cav.count" type="number" min="0">
+            <br/>
+            {a troops.level2.seige.name a}: 
+              <input ng-model="troops.level2.seige.count" type="number" min="0">
+          </div>
+          <div style="width:30%float:left;">
+            <p>Level 3</p>
+            {a troops.level3.inf.name a}: 
+              <input ng-model="troops.level3.inf.count" type="number" min="0">
+            <br/>
+            {a troops.level3.arch.name a}: 
+              <input ng-model="troops.level3.arch.count" type="number" min="0">
+            <br/>
+            {a troops.level3.cav.name a}: 
+              <input ng-model="troops.level3.cav.count" type="number" min="0">
+            <br/>
+            {a troops.level3.seige.name a}: 
+              <input ng-model="troops.level3.seige.count" type="number" min="0">
+          </div>
+          <div style="width:30%;clear: left;">
+            <p>Level 4</p>
+            {a troops.level4.inf.name a}: 
+              <input ng-model="troops.level4.inf.count" type="number" min="0">
+            <br/>
+            {a troops.level4.arch.name a}: 
+              <input ng-model="troops.level4.arch.count" type="number" min="0">
+            <br/>
+            {a troops.level4.cav.name a}: 
+              <input ng-model="troops.level4.cav.count" type="number" min="0">
+            <br/>
+            {a troops.level4.seige.name a}: 
+              <input ng-model="troops.level4.seige.count" type="number" min="0">
+          </div>
+        </div>
+      <div>
+        <p>test</p>
+      </div>
+      <div>
+        <p> Troops: |{a troops a}| </p>
+      </div>
     </div>
   </body>
   <script>
