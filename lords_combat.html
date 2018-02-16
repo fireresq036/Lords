@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-{% autoescape true %}
 <html>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
-  </script>
   <head>
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -48,53 +45,19 @@
     <div style="padding-left: 20px;">
       <h1>Lords Mobile Combat</h1>
       <form action="/lords_combat">
-        <h2>opponents force</h2>
         <input type="hidden" name="initial" value="False">
-        <div style="width:100%">
-          <h3>Level 1 Troops</h3>
-          <div style="width:50%;float:left;">
-            <p>Grunt</p><input type="text" name="inf1">
-            <p>Archer</p><input type="text" name="arch1">
+        <h2>opponents force</h2>
+        <div style="width:30%">
+        {% for level_name in level_names %}
+          <h2>{{ level_name }}</h2>
+          <div>
+          {% for index in range(size) %}
+            <p>{{ unit_names[level_name][index] }}:</p>
+            <input type="number" name={{ input_tags[level_name][index] }}
+                min="0" value="0"/>
+          {% endfor %}
           </div>
-           <div style="width:50%;float:left;">
-            <p>Cataphract</p><input type="text" name="cav1">
-            <p>Ballista</p><input type="text" name="seige1">
-          </div>
-
-        </div style="width:100%">
-        <div>
-          <h3>Level 2 Troops</h3>
-          <div style="width:50%;float:left;">
-            <p>Gladiator</p><input type="text" name="inf2">
-            <p>Sharpshooter</p><input type="text" name="arch2">
-          </div>
-          <div style="width:50%;float:left;">
-            <p>Reptilan Raider</p><input type="text" name="cav2">
-            <p>Catapult</p><input type="text" name="seige2">
-          </div>
-
-        </div>
-        <div style="width:100%">
-          <h3>Level 3 Troops</h3>
-          <div style="width:50%;float:left;">
-            <p>Royal Guard</p><input type="text" name="inf3">
-            <p>Stealth Sniper</p><input type="text" name="arch3">
-          </div>
-          <div style="width:50%;float:left;">
-            <p>Royal Cavalry</p><input type="text" name="cav3">
-            <p>Fire Trebuchet</p><input type="text" name="seige3">
-          </div>
-        </div>
-        <div style="width:100%">
-          <h3>Level 4 Troops</h3>
-          <div style="width:50%;float:left;">
-            <p>Heeroic Fighter</p><input type="text" name="inf4">
-            <p>Heroic Cannonear</p><input type="text" name="arch4">
-          </div>
-          <div style="width:50%;float:left;">
-            <p>Ancient Drake Rider</p><input type="text" name="cav4">
-            <p>Destroyer</p><input type="text" name="seige4">
-          </div>
+        {% endfor %}
         </div>
         <input type="submit" value="Submit">
       </form>
@@ -103,13 +66,5 @@
     <div style="padding-left: 20px; display: none;">
       <p>test</p>
     </div>
-    
   </body>
 </html>
-<script>
-
-var app = angular.module("myApp", []); 
-
-</script>
-
-{% endautoescape %}
