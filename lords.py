@@ -39,12 +39,17 @@ class LordsCombat(webapp2.RequestHandler):
                 size=len(lords_support.unit_names()[lords_support.LEVEL1])))
         else:
             logging.info("false")
-            lords_support.process_input(self.request)
+            troops = lords_support.process_input(self.request)
             template = jinja_environment.get_template('lords_results.html')
+            totals = lords_support.calculate_totals(troops)
+            percents = lords_support.calculate_percents(troops, totals)
             self.response.out.write(template.render(
                 level_names=lords_support.display_levels(),
                 unit_names=lords_support.unit_names(),
-                troop_size=lords_support.init_data(),
+                unit_classes=lords_support.unit_classes(),
+                troop_size=troops,
+                troop_percent=percents,
+                level_total=totals,
                 size=len(lords_support.unit_names()[lords_support.LEVEL1])))
 
 

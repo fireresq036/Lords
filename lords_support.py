@@ -23,6 +23,10 @@ def unit_names():
     return unit_names
 
 
+def unit_classes():
+    return ['Infintery', 'Ranged', 'Calvery', 'Seige']
+
+
 def tag_names():
     tag_names = {}
     tag_names[LEVEL1] = ['inf1', 'arch1', 'cav1', 'seige1']
@@ -57,33 +61,69 @@ def process_input(request):
                             int(request.get('cav4', '0')),
                             int(request.get('seige4', '0')))
     logging.info(troops[LEVEL1])
+    return troops
 
 
-def calculate_percents(troops):
-    percents = {}
+def calculate_totals(troops):
     total_troops = {}
     total_troops[LEVEL1] = sum(troops[LEVEL1])
+    total_troops[LEVELALL] = total_troops[LEVEL1]
     total_troops[LEVEL2] = sum(troops[LEVEL2])
+    total_troops[LEVELALL] += total_troops[LEVEL1]
     total_troops[LEVEL3] = sum(troops[LEVEL3])
+    total_troops[LEVELALL] += total_troops[LEVEL1]
     total_troops[LEVEL4] = sum(troops[LEVEL4])
+    total_troops[LEVELALL] += total_troops[LEVEL1]
+    return total_troops
+
+
+def calculate_percents(troops, totals):
     percents = collections.defaultdict(list)
-    percents[LEVEL1].append(troops[LEVEL1].inf / float(total_troops[LEVEL1]))
-    percents[LEVEL1].append(troops[LEVEL1].arch / float(total_troops[LEVEL1]))
-    percents[LEVEL1].append(troops[LEVEL1].calv / float(total_troops[LEVEL1]))
-    percents[LEVEL1].append(troops[LEVEL1].siege / float(total_troops[LEVEL1]))
-    percents[LEVEL2].append(troops[LEVEL2].inf / float(total_troops[LEVEL2]))
-    percents[LEVEL2].append(troops[LEVEL2].arch / float(total_troops[LEVEL2]))
-    percents[LEVEL2].append(troops[LEVEL2].calv / float(total_troops[LEVEL2]))
-    percents[LEVEL2].append(troops[LEVEL2].siege / float(total_troops[LEVEL2]))
-    percents[LEVEL3].append(troops[LEVEL3].inf / float(total_troops[LEVEL3]))
-    percents[LEVEL3].append(troops[LEVEL3].arch / float(total_troops[LEVEL3]))
-    percents[LEVEL3].append(troops[LEVEL3].calv / float(total_troops[LEVEL3]))
-    percents[LEVEL3].append(troops[LEVEL3].siege / float(total_troops[LEVEL3]))
-    percents[LEVEL4].append(troops[LEVEL4].inf / float(total_troops[LEVEL4]))
-    percents[LEVEL4].append(troops[LEVEL4].arch / float(total_troops[LEVEL4]))
-    percents[LEVEL4].append(troops[LEVEL4].calv / float(total_troops[LEVEL4]))
-    percents[LEVEL4].append(troops[LEVEL4].siege / float(total_troops[LEVEL4]))
-    return total_troops, percents
+    if totals[LEVEL1] == 0:
+        percents[LEVEL1].extend([0, 0, 0, 0])
+    else:
+        percents[LEVEL1].append(troops[LEVEL1].inf /
+                                float(totals[LEVEL1]))
+        percents[LEVEL1].append(troops[LEVEL1].arch /
+                                float(totals[LEVEL1]))
+        percents[LEVEL1].append(troops[LEVEL1].calv /
+                                float(totals[LEVEL1]))
+        percents[LEVEL1].append(troops[LEVEL1].siege /
+                                float(totals[LEVEL1]))
+    if totals[LEVEL2] == 0:
+        percents[LEVEL2].extend([0, 0, 0, 0])
+    else:
+        percents[LEVEL2].append(troops[LEVEL2].inf /
+                                float(totals[LEVEL2]))
+        percents[LEVEL2].append(troops[LEVEL2].arch /
+                                float(totals[LEVEL2]))
+        percents[LEVEL2].append(troops[LEVEL2].calv /
+                                float(totals[LEVEL2]))
+        percents[LEVEL2].append(troops[LEVEL2].siege /
+                                float(totals[LEVEL2]))
+    if totals[LEVEL3] == 0:
+        percents[LEVEL3].extend([0, 0, 0, 0])
+    else:
+        percents[LEVEL3].append(troops[LEVEL3].inf /
+                                float(totals[LEVEL3]))
+        percents[LEVEL3].append(troops[LEVEL3].arch /
+                                float(totals[LEVEL3]))
+        percents[LEVEL3].append(troops[LEVEL3].calv /
+                                float(totals[LEVEL3]))
+        percents[LEVEL3].append(troops[LEVEL3].siege /
+                                float(totals[LEVEL3]))
+    if totals[LEVEL4] == 0:
+        percents[LEVEL4].extend([0, 0, 0, 0])
+    else:
+        percents[LEVEL4].append(troops[LEVEL4].inf /
+                                float(totals[LEVEL4]))
+        percents[LEVEL4].append(troops[LEVEL4].arch /
+                                float(totals[LEVEL4]))
+        percents[LEVEL4].append(troops[LEVEL4].calv /
+                                float(totals[LEVEL4]))
+        percents[LEVEL4].append(troops[LEVEL4].siege /
+                                float(totals[LEVEL4]))
+    return percents
 
 
 def init_data():

@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <title>Lords Mobile Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-  <div style="padding-left: 20px;">
+  <body style="margin-left: 25px;">
     <h1>Lords Mobile Combat Results</h1>
     <h2>opponents force</h2>
-    <div style="width:30%">
+    <p>Total Troops {{ level_total["all"] }}
+    <div class="row">
       {% for level_name in level_names %}
-        <h2>{{ level_name }}</h2>
-        <div>
-          {% for index in range(size) %}
+        <h2>{{ level_name }}: Total Forces in this level {{ level_total[level_name] }}</h2>
+        {% for index in range(size) %}
+          <div class="col-xs-3">
             <p>
-                {{ unit_names[level_name][index] }}:
-                {{ troop_size[level_name][index] }}
-            </p>
-          {% endfor %}
+              {{ unit_names[level_name][index] }}:
+              {{ troop_size[level_name][index] }}:
+              {{ troop_percent[level_name][index] * 100.0 }}%
+             </p>
+          </div>
+        {% endfor %}
+      {% endfor %}
+      </div>
+    </div>
+    <h2>Precents to use to combat the enemy </h2>
+    <div class="row">
+      {% for index in range(size) %}
+        <div class="col-xs-3">
+          <p> {{unit_classes[index]}}: {{ index }} </p>
         </div>
       {% endfor %}
-    </div>
-    
-    <div style="padding-left: 20px; display: none;">
-      <p>test</p>
     </div>
   </body>
 </html>
