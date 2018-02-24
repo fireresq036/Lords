@@ -55,3 +55,11 @@ class Lords(unittest.TestCase):
 
         percents = lords_support.calculate_percents(troops, expected_totals)
         self.assertEqual(expected_percents, percents)
+
+    def test_precentstroop_type(self):
+        troops = {lords_support.LEVEL1: lords_support.Troops(1, 2, 3, 4),
+                  lords_support.LEVEL2: lords_support.Troops(4, 3, 2, 1),
+                  lords_support.LEVEL3: lords_support.Troops(1, 2, 3, 4),
+                  lords_support.LEVEL4: lords_support.Troops(4, 3, 2, 1)}
+        percents = lords_support.calculate_type_percents(troops)
+        self.assertEqual(percents, "0")

@@ -77,6 +77,31 @@ def calculate_totals(troops):
     return total_troops
 
 
+def calculate_type_percents(troops):
+    total_troop_type = {}
+    troop_type_percent = {}
+    unit_class = unit_classes()
+    totals = calculate_totals(troops)
+    total_troop_type[unit_class[0]] = (
+        troops[LEVEL1].inf + troops[LEVEL2].inf +
+        troops[LEVEL3].inf + troops[LEVEL4].inf)
+    total_troop_type[unit_class[1]] = (
+        troops[LEVEL1].arch + troops[LEVEL2].arch +
+        troops[LEVEL3].arch + troops[LEVEL4].arch)
+    total_troop_type[unit_class[2]] = (
+        troops[LEVEL1].calv + troops[LEVEL2].calv +
+        troops[LEVEL3].calv + troops[LEVEL4].calv)
+    total_troop_type[unit_class[3]] = (
+        troops[LEVEL1].seige + troops[LEVEL2].seige +
+        troops[LEVEL3].seige + troops[LEVEL4].seige)
+    for unit_type in unit_class:
+        if total_troop_type == 0:
+            troop_type_percent[unit_type] = 0.0
+        else:
+            troop_type_percent[unit_type] = total_troop_type / totals[LEVELALL]
+    return total_troop_type, troop_type_percent
+
+
 def calculate_percents(troops, totals):
     percents = collections.defaultdict(list)
     if totals[LEVEL1] == 0:

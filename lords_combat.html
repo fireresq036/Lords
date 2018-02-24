@@ -44,7 +44,7 @@
       <div class="col-xs-8">
         <form action="/lords_combat">
           <input type="hidden" name="initial" value="False">
-          <h2>opponents force</h2>
+          <button type="submit" class="btn btn-default">Submit</button>          <h2>opponents force</h2>
           {% for level_name in level_names %}
             <h3>{{ level_name }} </h3>
             <div id={{ level_name.replace(" ", "_") }} class="collapse in">
