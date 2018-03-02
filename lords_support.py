@@ -2,7 +2,8 @@ import collections
 import json
 import logging
 
-Troops = collections.namedtuple('Troops', 'inf, arch calv siege')
+Troops = collections.namedtuple('Troops',
+                                ['inf', 'arch', 'calv', 'seige'], verbose=True)
 
 LEVEL1 = "Level 1"
 LEVEL2 = "Level 2"
@@ -69,15 +70,16 @@ def calculate_totals(troops):
     total_troops[LEVEL1] = sum(troops[LEVEL1])
     total_troops[LEVELALL] = total_troops[LEVEL1]
     total_troops[LEVEL2] = sum(troops[LEVEL2])
-    total_troops[LEVELALL] += total_troops[LEVEL1]
+    total_troops[LEVELALL] += total_troops[LEVEL2]
     total_troops[LEVEL3] = sum(troops[LEVEL3])
-    total_troops[LEVELALL] += total_troops[LEVEL1]
+    total_troops[LEVELALL] += total_troops[LEVEL3]
     total_troops[LEVEL4] = sum(troops[LEVEL4])
-    total_troops[LEVELALL] += total_troops[LEVEL1]
+    total_troops[LEVELALL] += total_troops[LEVEL4]
     return total_troops
 
 
 def calculate_type_percents(troops):
+    log = logging.getLogger('Lords.test_precentstroop_type')
     total_troop_type = {}
     troop_type_percent = {}
     unit_class = unit_classes()
@@ -95,10 +97,14 @@ def calculate_type_percents(troops):
         troops[LEVEL1].seige + troops[LEVEL2].seige +
         troops[LEVEL3].seige + troops[LEVEL4].seige)
     for unit_type in unit_class:
-        if total_troop_type == 0:
+        if total_troop_type[unit_type] == 0:
             troop_type_percent[unit_type] = 0.0
         else:
-            troop_type_percent[unit_type] = total_troop_type / totals[LEVELALL]
+            log.info('type %f all %f' % (total_troop_type[unit_type],
+                                         totals[LEVELALL]))
+            troop_type_percent[unit_type] = int(
+                float(total_troop_type[unit_type]) /
+                float(totals[LEVELALL]) * 100)
     return total_troop_type, troop_type_percent
 
 
@@ -113,7 +119,7 @@ def calculate_percents(troops, totals):
                                 float(totals[LEVEL1]))
         percents[LEVEL1].append(troops[LEVEL1].calv /
                                 float(totals[LEVEL1]))
-        percents[LEVEL1].append(troops[LEVEL1].siege /
+        percents[LEVEL1].append(troops[LEVEL1].seige /
                                 float(totals[LEVEL1]))
     if totals[LEVEL2] == 0:
         percents[LEVEL2].extend([0, 0, 0, 0])
@@ -124,7 +130,7 @@ def calculate_percents(troops, totals):
                                 float(totals[LEVEL2]))
         percents[LEVEL2].append(troops[LEVEL2].calv /
                                 float(totals[LEVEL2]))
-        percents[LEVEL2].append(troops[LEVEL2].siege /
+        percents[LEVEL2].append(troops[LEVEL2].seige /
                                 float(totals[LEVEL2]))
     if totals[LEVEL3] == 0:
         percents[LEVEL3].extend([0, 0, 0, 0])
@@ -135,7 +141,7 @@ def calculate_percents(troops, totals):
                                 float(totals[LEVEL3]))
         percents[LEVEL3].append(troops[LEVEL3].calv /
                                 float(totals[LEVEL3]))
-        percents[LEVEL3].append(troops[LEVEL3].siege /
+        percents[LEVEL3].append(troops[LEVEL3].seige /
                                 float(totals[LEVEL3]))
     if totals[LEVEL4] == 0:
         percents[LEVEL4].extend([0, 0, 0, 0])
@@ -146,7 +152,7 @@ def calculate_percents(troops, totals):
                                 float(totals[LEVEL4]))
         percents[LEVEL4].append(troops[LEVEL4].calv /
                                 float(totals[LEVEL4]))
-        percents[LEVEL4].append(troops[LEVEL4].siege /
+        percents[LEVEL4].append(troops[LEVEL4].seige /
                                 float(totals[LEVEL4]))
     return percents
 

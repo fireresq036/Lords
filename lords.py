@@ -43,6 +43,8 @@ class LordsCombat(webapp2.RequestHandler):
             template = jinja_environment.get_template('lords_results.html')
             totals = lords_support.calculate_totals(troops)
             percents = lords_support.calculate_percents(troops, totals)
+            type_total, type_percent = (
+                lords_support.calculate_type_percents(troops))
             self.response.out.write(template.render(
                 level_names=lords_support.display_levels(),
                 unit_names=lords_support.unit_names(),
@@ -50,6 +52,8 @@ class LordsCombat(webapp2.RequestHandler):
                 troop_size=troops,
                 troop_percent=percents,
                 level_total=totals,
+                type_total=type_total,
+                type_percent=type_percent,
                 size=len(lords_support.unit_names()[lords_support.LEVEL1])))
 
 

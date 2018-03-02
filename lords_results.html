@@ -29,9 +29,10 @@
     </div>
     <h2>Precents to use to combat the enemy </h2>
     <div class="row">
-      {% for index in range(size) %}
+      {% for index in unit_classes %}
         <div class="col-xs-3">
-          <p> {{unit_classes[index]}}: {{ index }} </p>
+          <p> {{index}}: {{ type_percent[index] }} </p>
+          
         </div>
       {% endfor %}
     </div>

@@ -1,8 +1,16 @@
+import logging
 import lords_support
+import sys
 import unittest
 
 
 class Lords(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        logging.basicConfig(stream=sys.stderr)
+        logging.getLogger(
+            "Lords.test_precentstroop_type").setLevel(logging.DEBUG)
+
     def test_totals(self):
         """test"""
         expected_total = {lords_support.LEVEL1: 10,
@@ -57,9 +65,21 @@ class Lords(unittest.TestCase):
         self.assertEqual(expected_percents, percents)
 
     def test_precentstroop_type(self):
+        log = logging.getLogger('Lords.test_precentstroop_type')
         troops = {lords_support.LEVEL1: lords_support.Troops(1, 2, 3, 4),
-                  lords_support.LEVEL2: lords_support.Troops(4, 3, 2, 1),
+                  lords_support.LEVEL2: lords_support.Troops(1, 2, 3, 4),
                   lords_support.LEVEL3: lords_support.Troops(1, 2, 3, 4),
-                  lords_support.LEVEL4: lords_support.Troops(4, 3, 2, 1)}
-        percents = lords_support.calculate_type_percents(troops)
-        self.assertEqual(percents, "0")
+                  lords_support.LEVEL4: lords_support.Troops(1, 2, 3, 4)}
+        self.assertEqual(len(troops), 4)
+        self.assertEqual((troops[lords_support.LEVEL1]).seige, 4)
+        for key, data in troops.iteritems():
+            log.info('%s: %s' % (key, data))
+        totals, percents = lords_support.calculate_type_percents(troops)
+        self.assertEqual(percents, {'Infintery': 10, 'Calvery': 30,
+                                    'Ranged': 20, 'Seige': 40})
+        self.assertEqual(totals, {'Infintery': 4, 'Calvery': 12,
+                                  'Ranged': 8, 'Seige': 16})
+
+
+if __name__ == '__main__':
+    unittest.main()
