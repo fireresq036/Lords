@@ -11,6 +11,16 @@ LEVEL3 = "Level 3"
 LEVEL4 = "Level 4"
 LEVELALL = "all"
 
+TYPE_INF = "Infantry"
+TYPE_RNG = "Ranged"
+TYPE_CAV = "Calvery"
+TYPE_SEG = "Seige"
+
+TYPE_INF_INDEX = 0
+TYPE_RNG_INDEX = 1
+TYPE_CAV_INDEX = 2
+TYPE_SEG_INDEX = 3
+
 
 def unit_names():
     unit_names = {}
@@ -25,7 +35,7 @@ def unit_names():
 
 
 def unit_classes():
-    return ['Infintery', 'Ranged', 'Calvery', 'Seige']
+    return [TYPE_INF, TYPE_RNG, TYPE_CAV, TYPE_SEG]
 
 
 def tag_names():
@@ -84,16 +94,16 @@ def calculate_type_percents(troops):
     troop_type_percent = {}
     unit_class = unit_classes()
     totals = calculate_totals(troops)
-    total_troop_type[unit_class[0]] = (
+    total_troop_type[unit_class[TYPE_CAV_INDEX]] = (
         troops[LEVEL1].inf + troops[LEVEL2].inf +
         troops[LEVEL3].inf + troops[LEVEL4].inf)
-    total_troop_type[unit_class[1]] = (
+    total_troop_type[unit_class[TYPE_INF_INDEX]] = (
         troops[LEVEL1].arch + troops[LEVEL2].arch +
         troops[LEVEL3].arch + troops[LEVEL4].arch)
-    total_troop_type[unit_class[2]] = (
+    total_troop_type[unit_class[TYPE_RNG_INDEX]] = (
         troops[LEVEL1].calv + troops[LEVEL2].calv +
         troops[LEVEL3].calv + troops[LEVEL4].calv)
-    total_troop_type[unit_class[3]] = (
+    total_troop_type[unit_class[TYPE_SEG_INDEX]] = (
         troops[LEVEL1].seige + troops[LEVEL2].seige +
         troops[LEVEL3].seige + troops[LEVEL4].seige)
     for unit_type in unit_class:

@@ -75,10 +75,14 @@ class Lords(unittest.TestCase):
         for key, data in troops.iteritems():
             log.info('%s: %s' % (key, data))
         totals, percents = lords_support.calculate_type_percents(troops)
-        self.assertEqual(percents, {'Infintery': 10, 'Calvery': 30,
-                                    'Ranged': 20, 'Seige': 40})
-        self.assertEqual(totals, {'Infintery': 4, 'Calvery': 12,
-                                  'Ranged': 8, 'Seige': 16})
+        self.assertEqual(percents, {lords_support.TYPE_INF: 20,
+                                    lords_support.TYPE_CAV: 10,
+                                    lords_support.TYPE_RNG: 30,
+                                    lords_support.TYPE_SEG: 40})
+        self.assertEqual(totals, {lords_support.TYPE_INF: 8,
+                                  lords_support.TYPE_CAV:4,
+                                  lords_support.TYPE_RNG: 12,
+                                  lords_support.TYPE_SEG: 16})
 
 
 if __name__ == '__main__':
